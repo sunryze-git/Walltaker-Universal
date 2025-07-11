@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: choco install cmake -y
+        run: winget install -e --id Kitware.CMake
       - name: Install Qt6
         uses: jurplel/install-qt-action@v3
         with:
@@ -25,6 +25,10 @@ jobs:
           cd build-win-x64
           cmake .. -G "Visual Studio 17 2022" -A x64
           cmake --build . --config Release
+      - name: Package with windeployqt
+        run: |
+          cd build-win-x64/Release
+          windeployqt walltaker_universal.exe
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
