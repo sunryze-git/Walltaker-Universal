@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: winget install -e --id Kitware.CMake
+        run: choco install cmake -y
       - name: Install Qt6
         uses: jurplel/install-qt-action@v3
         with:
