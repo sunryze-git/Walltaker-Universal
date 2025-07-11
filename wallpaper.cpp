@@ -60,7 +60,23 @@ public:
         // Set the wallpaper using SystemParametersInfoW
         BOOL result = SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID)wImagePath.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
         if (!result) {
-            std::cerr << "Failed to set wallpaper on Windows. Error: " << GetLastError() << std::endl;
+            DWORD errCode = GetLastError();
+            LPSTR errMsg = nullptr;
+            FormatMessageA(
+                FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                NULL,
+                errCode,
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                (LPSTR)&errMsg,
+                0,
+                NULL
+            );
+            std::cerr << "Failed to set wallpaper on Windows. Error: " << errCode;
+            if (errMsg) {
+                std::cerr << " (" << errMsg << ")";
+                LocalFree(errMsg);
+            }
+            std::cerr << std::endl;
         }
         return result != 0;
     }
