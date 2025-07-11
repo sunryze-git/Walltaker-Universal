@@ -33,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: walltaker_universal-windows-x64
-          path: build-win-x64/Release/walltaker_universal.exe
+          path: build-win-x64/Release/*
