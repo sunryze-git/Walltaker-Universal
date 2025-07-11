@@ -1,0 +1,28 @@
+name: Build Windows x64
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: choco install cmake -y
+      - name: Build
+        run: |
+          mkdir build-win-x64
+          cd build-win-x64
+          cmake .. -G "MinGW Makefiles"
+          mingw32-make
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: walltaker_universal-windows-x64
+          path: build-win-x64/walltaker_universal.exe
+
