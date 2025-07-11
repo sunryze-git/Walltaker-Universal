@@ -11,16 +11,27 @@ add_executable(walltaker_universal main.cpp
         wallpaper.cpp
         wallpaper.h
         utils.cpp
-        utils.h)
+        utils.h
+        api.cpp
+        api.h
+        walltaker_response.h
+        walltaker_opinion.h
+        tray.cpp)
+
+# Find Qt6 instead of Qt5
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 if (WIN32)
-    target_link_libraries(walltaker_universal PRIVATE wininet)
+    target_link_libraries(walltaker_universal PRIVATE wininet Qt6::Widgets)
     target_include_directories(walltaker_universal PRIVATE ${CMAKE_SOURCE_DIR}/deps/nlohmann_json/include)
 elseif(APPLE)
-    # macOS specific settings (add frameworks/libs as needed)
+    target_link_libraries(walltaker_universal PRIVATE Qt6::Widgets)
     target_include_directories(walltaker_universal PRIVATE ${CMAKE_SOURCE_DIR}/deps/nlohmann_json/include)
 else()
     find_package(CURL REQUIRED)
-    target_link_libraries(walltaker_universal PRIVATE CURL::libcurl)
+    target_link_libraries(walltaker_universal PRIVATE CURL::libcurl Qt6::Widgets)
     target_include_directories(walltaker_universal PRIVATE ${CMAKE_SOURCE_DIR}/deps/nlohmann_json/include)
 endif()
+
+qt_add_resources(walltaker_universal_resources resources.qrc)
+target_sources(walltaker_universal PRIVATE ${walltaker_universal_resources})

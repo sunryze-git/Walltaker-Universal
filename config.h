@@ -7,4 +7,4 @@ struct ConfigFile {
     std::string ApiKey;
 };
 
-bool LoadConfig(ConfigFile& destConfigStruct, const std::string& filePath);
+int LoadConfig(ConfigFile& destConfigStruct, const std::string& filePath);
