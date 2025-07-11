@@ -18,11 +18,10 @@ jobs:
         run: |
           mkdir build-win-x64
           cd build-win-x64
-          cmake .. -G "MinGW Makefiles"
-          mingw32-make
+          cmake .. -G "Visual Studio 17 2022" -A x64
+          cmake --build . --config Release
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: walltaker_universal-windows-x64
-          path: build-win-x64/walltaker_universal.exe
-
+          path: build-win-x64/Release/walltaker_universal.exe
