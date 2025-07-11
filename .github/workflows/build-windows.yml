@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Install dependencies
         run: choco install cmake -y
-      - name: Install Qt6
+      - name: Install Qt5.15
         uses: jurplel/install-qt-action@v3
         with:
-          version: '6.6.2'
+          version: '5.15.2'
           arch: win64_msvc2019_64
       - name: Build
         run: |

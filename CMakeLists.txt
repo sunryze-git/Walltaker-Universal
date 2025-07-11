@@ -18,20 +18,20 @@ add_executable(walltaker_universal main.cpp
         walltaker_opinion.h
         tray.cpp)
 
-# Find Qt6 instead of Qt5
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
+# Find Qt5 instead of Qt6
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 if (WIN32)
-    target_link_libraries(walltaker_universal PRIVATE wininet Qt6::Widgets)
+    target_link_libraries(walltaker_universal PRIVATE wininet Qt5::Widgets)
     target_include_directories(walltaker_universal PRIVATE ${CMAKE_SOURCE_DIR}/deps/nlohmann_json/include)
 elseif(APPLE)
-    target_link_libraries(walltaker_universal PRIVATE Qt6::Widgets)
+    target_link_libraries(walltaker_universal PRIVATE Qt5::Widgets)
     target_include_directories(walltaker_universal PRIVATE ${CMAKE_SOURCE_DIR}/deps/nlohmann_json/include)
 else()
     find_package(CURL REQUIRED)
-    target_link_libraries(walltaker_universal PRIVATE CURL::libcurl Qt6::Widgets)
+    target_link_libraries(walltaker_universal PRIVATE CURL::libcurl Qt5::Widgets)
     target_include_directories(walltaker_universal PRIVATE ${CMAKE_SOURCE_DIR}/deps/nlohmann_json/include)
 endif()
 
-qt_add_resources(walltaker_universal_resources resources.qrc)
+qt5_add_resources(walltaker_universal_resources resources.qrc)
 target_sources(walltaker_universal PRIVATE ${walltaker_universal_resources})
