@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y cmake g++ libcurl4-openssl-dev
       - name: Install Qt5.15
-        run: sudo apt-get install -y qt5-default qtbase5-dev qttools5-dev qttools5-dev-tools
+        run: sudo apt-get install -y qtbase5-dev qttools5-dev qttools5-dev-tools
       - name: Build
         run: |
           mkdir build-linux-x64
