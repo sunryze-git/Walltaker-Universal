@@ -1,0 +1,4 @@
+/build-linux-x64/
+/build-win-x64/
+/cmake-build-debug/
+/dist-win-x64/
